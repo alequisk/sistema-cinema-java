@@ -1,0 +1,107 @@
+@startuml
+skinparam defaultFontName "Roboto Medium"
+skinparam roundcorner 20
+
+package Controllers {
+  class CineController {
+    - cinesRepository : CinesRepository
+    - sessionsRepository : SessionsRepository
+    __
+    + CineController(cinesRepository: CinesRepository, sessionsRepository: SessionsRepository)
+    + getAll() : ArrayList<Cine>
+    + create(cine: Cine) : boolean
+    + remove(cine: Cine) : boolean
+    + sessionsOf(cine: Cine) : ArrayList<Session>
+  }
+}
+
+package Models {
+
+  class Address {
+    - street : String
+    - number : Integer
+    - city : String
+    - state : String
+    __
+    + Address(street : String, number : Integer, city : String, state : String)
+    + getStreet() : String
+    + setStreet(street : String) : void
+    + getNumber() : Integer
+    + setNumber(number : Integer) : void
+    + getCity() : String
+    + setCity(city : String) : void
+    + getState() : String
+    + setState(state : String) : void
+    + toString() : String
+  }
+
+  class Cine {
+    - name : String
+    - address : Address
+    __
+    + Cine(name : String, address : Address)
+    + getName() : String
+    + setName(name: String) : void
+    + getAddress() : Address
+    + setAddress(address : Address) : void
+    + equals(cine : Object) : boolean
+    + toString() : String
+  }
+
+  class Movie {
+    - name : String
+    - haveAgeLimit : boolean
+    - minimumAge : Integer
+    __
+    + getName() : String
+    + setName(name : String) : void
+    + isHaveAgeLimit() : boolean
+    + setHaveAgeLimit(haveAgeLimit : boolean) : void
+    + getMinimumAge() : Integer
+    + setMinimumAge(minimumAge : Integer) : void
+    + toString() : String
+  }
+
+  Person <|-- Admin
+  Person <|-- Client
+  Client "1" --- "0..*" Ticket : "Buy"
+
+  abstract Person {
+    - name : String
+    - login : String
+    - password : String
+    - birthday : Date
+    __
+    + getName() : String
+    + setName(name : String) : void
+    + getLogin() : String
+    + setLogin(login : String) : void
+    + getPassword() : String
+    + setPassword(password : String) : void
+    + getBirthday() : Date
+    + setBirthday(birthday : Date) : void
+  }
+
+  class Admin
+
+  class Ticket {
+    - seat : Integer
+    - session : Session
+    __
+    + Ticket(session : Session, seat : Integer)
+    + getSession() : Session
+    + setSession(session : Session) : void
+    + getSeat() : Integer
+    + setSeat(seat : Integer) : void
+  }
+  
+  class Client {
+    - purchases : ArrayList<Ticket>
+    __
+    + Client(name : String, birthday : Date, login : String, password : String)
+    + getPurchases() : ArrayList<Ticket>
+    + setPurchases(purchases : ArrayList<Ticket>) : void
+    + toString() : String
+  }
+}
+@enduml
