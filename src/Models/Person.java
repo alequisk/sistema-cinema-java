@@ -1,14 +1,15 @@
 package Models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class Person {
-    String name;
-    String login;
-    String password;
-    Date birthday;
+    protected String name;
+    private String login;
+    private String password;
+    private LocalDate birthday;
 
-    Person(String name, Date birthday, String login, String password) {
+    Person(String name, LocalDate birthday, String login, String password) {
         this.name = name;
         this.birthday = birthday;
         this.login = login;
@@ -39,11 +40,11 @@ public abstract class Person {
         this.password = password;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 }

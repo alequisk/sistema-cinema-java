@@ -3,7 +3,7 @@ package Models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Session {
+public class Session implements Comparable<Session> {
     Movie movie;
     Cine cine;
     LocalDateTime release;
@@ -23,10 +23,21 @@ public class Session {
         return movie;
     }
 
-    public Cine getCine() { return cine; }
+    public Cine getCine() {
+        return cine;
+    }
+
+    public LocalDateTime getRelease() {
+        return release;
+    }
 
     @Override
     public String toString() {
         return movie + ":" + cine;
+    }
+
+    @Override
+    public int compareTo(Session session) {
+        return this.release.compareTo(session.getRelease());
     }
 }

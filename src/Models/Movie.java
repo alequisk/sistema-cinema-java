@@ -1,6 +1,6 @@
 package Models;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     String name;
     boolean haveAgeLimit;
     Integer minimumAge;
@@ -38,5 +38,10 @@ public class Movie {
     @Override
     public String toString() {
         return "Movie{" + name + ":" + (minimumAge == null ? "L" : minimumAge) + "}";
+    }
+
+    @Override
+    public int compareTo(Movie movie) {
+        return this.name.compareTo(movie.getName());
     }
 }

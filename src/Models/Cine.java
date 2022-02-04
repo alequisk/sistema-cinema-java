@@ -1,6 +1,6 @@
 package Models;
 
-public class Cine {
+public class Cine implements Comparable<Cine> {
     String name;
     Address address;
 
@@ -33,5 +33,10 @@ public class Cine {
     @Override
     public String toString() {
         return "Cine{" + name + "," + address + "}";
+    }
+
+    @Override
+    public int compareTo(Cine cine) {
+        return this.name.compareTo(cine.getName());
     }
 }

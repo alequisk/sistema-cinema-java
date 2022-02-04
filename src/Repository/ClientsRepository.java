@@ -10,4 +10,6 @@ public interface ClientsRepository {
     boolean create(Client client);
 
     boolean delete(Client client);
+
+    Client findOne(String cpf);
 }

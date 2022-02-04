@@ -1,6 +1,6 @@
 package Models;
 
-public class Ticket {
+public class Ticket implements Comparable<Ticket> {
     Session session;
     Integer seat;
 
@@ -23,5 +23,10 @@ public class Ticket {
 
     public void setSeat(Integer seat) {
         this.seat = seat;
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        return 0;
     }
 }

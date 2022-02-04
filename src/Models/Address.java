@@ -1,6 +1,6 @@
 package Models;
 
-public class Address {
+public class Address implements Comparable<Address> {
     String street;
     Integer number;
     String city;
@@ -50,4 +50,8 @@ public class Address {
         return "Address{" + street + "," + number + "," + city + "}";
     }
 
+    @Override
+    public int compareTo(Address address) {
+        return this.getState().compareTo(address.getState());
+    }
 }

@@ -1,12 +1,12 @@
 package Models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Client extends Person {
+public class Client extends Person implements Comparable<Person> {
     ArrayList<Ticket> purchases;
 
-    Client(String name, Date birthday, String login, String password) {
+    public Client(String name, LocalDate birthday, String login, String password) {
         super(name, birthday, login, password);
     }
 
@@ -21,5 +21,10 @@ public class Client extends Person {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        return this.getName().compareTo(person.getName());
     }
 }
