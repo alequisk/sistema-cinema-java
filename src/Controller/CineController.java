@@ -9,11 +9,20 @@ import java.util.ArrayList;
 
 public class CineController {
     private final CinesRepository cinesRepository;
-    private final SessionsRepository sessionsRepository;
+//    private final SessionsRepository sessionsRepository;
+    public static CineController instance;
 
-    public CineController(CinesRepository cinesRepository, SessionsRepository sessionsRepository) {
+    public static CineController getInstance(CinesRepository cinesRepository) {
+        if (instance == null) {
+            instance = new CineController(cinesRepository);
+        }
+        return instance;
+    }
+
+
+    private CineController(CinesRepository cinesRepository) {
         this.cinesRepository = cinesRepository;
-        this.sessionsRepository = sessionsRepository;
+//        this.sessionsRepository = sessionsRepository;
     }
 
     public ArrayList<Cine> getAll() {
@@ -26,8 +35,8 @@ public class CineController {
         return cinesRepository.delete(cine);
     }
 
-    public ArrayList<Session> sessionsOf(Cine cine) {
-        return sessionsRepository.findByCine(cine);
-    }
+//    public ArrayList<Session> sessionsOf(Cine cine) {
+//        return sessionsRepository.findByCine(cine);
+//    }
 
 }

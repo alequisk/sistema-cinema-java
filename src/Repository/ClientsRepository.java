@@ -1,15 +1,14 @@
 package Repository;
 
 import Models.Client;
-
-import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 public interface ClientsRepository {
-    ArrayList<Client> getAll();
+    ObservableList<Client> getAll();
 
     boolean create(Client client);
 
-    boolean delete(Client client);
+    boolean delete(String login);
 
-    Client findOne(String cpf);
+    Client findOne(String login);
 }

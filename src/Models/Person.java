@@ -1,7 +1,7 @@
 package Models;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Person {
     protected String name;
@@ -9,7 +9,7 @@ public abstract class Person {
     private String password;
     private LocalDate birthday;
 
-    Person(String name, LocalDate birthday, String login, String password) {
+    public Person(String name, LocalDate birthday, String login, String password) {
         this.name = name;
         this.birthday = birthday;
         this.login = login;
@@ -46,5 +46,9 @@ public abstract class Person {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public String getBirthdayString() {
+        return birthday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

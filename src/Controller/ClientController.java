@@ -6,19 +6,37 @@ import Repository.ClientsRepository;
 public class ClientController {
     //TODO: buyTicket
     //TODO: loadMyPurchases
-    ClientsRepository clientsRepository;
+    private static ClientController instance;
+    private final ClientsRepository clientsRepository;
 
-    public ClientController(ClientsRepository clientsRepository) {
-
+    private ClientController(ClientsRepository clientsRepository) {
         this.clientsRepository = clientsRepository;
     }
 
-    Client login(String login, String password) {
+    public static ClientController getInstance(ClientsRepository clientsRepository) {
+        if (instance == null) {
+            instance = new ClientController(clientsRepository);
+        }
+        return instance;
+    }
+
+    public boolean login(String login, String password) {
         Client client = clientsRepository.findOne(login);
         if (client == null || !client.getPassword().equals(password)) {
-            return null;
+            return false;
         }
-        return client;
+        SessionUserController.user = client;
+        SessionUserController.isAdmin = false;
+        return true;
     }
+
+    public boolean create(Client client) {
+        return clientsRepository.create(client);
+    }
+
+
+//    public ArrayList<Ticket> getAll(String login) {
+//        return clientsRepository.getAll();
+//    }
 
 }
