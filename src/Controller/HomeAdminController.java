@@ -3,13 +3,34 @@ package Controller;
 import Models.Address;
 import Models.Cine;
 import Repository.implementation.MySQLCinesRepository;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class HomeAdminController {
     private final Alert alert = new Alert(Alert.AlertType.NONE);
     private CineController cineController = null;
+
+    @FXML
+    private TableView<Cine> cineTable;
+    @FXML
+    private TableColumn<Cine, String> cineNameCL;
+    @FXML
+    private TableColumn<Cine, String> cineStreetCL;
+    @FXML
+    private TableColumn<Cine, Integer> cineNumberCL;
+    @FXML
+    private TableColumn<Cine, String> cineStateCL;
+    @FXML
+    private TableColumn<Cine, String> cineCityCL;
+
+    ObservableList<Cine> cineObservableList = FXCollections.observableArrayList();
 
     @FXML
     private TextField cineCityTF;
@@ -70,4 +91,19 @@ public class HomeAdminController {
         cineStateTF.setText("");
         cineStreetTF.setText("");
     }
+
+    @FXML
+    public void initialize() {
+        if (cineController == null) {
+            cineController = CineController.getInstance(MySQLCinesRepository.getInstance());
+        }
+        cineObservableList.addAll(cineController.getAll());
+        cineNameCL.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        cineStreetCL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress().getStreet()));
+        cineStateCL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress().getState()));
+        cineCityCL.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress().getCity()));
+        cineTable.setItems(cineObservableList);
+    }
+
 }

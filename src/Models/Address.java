@@ -2,11 +2,11 @@ package Models;
 
 public class Address implements Comparable<Address> {
     String street;
-    Integer number;
+    int number;
     String city;
     String state;
 
-    public Address(String street, Integer number, String city, String state) {
+    public Address(String street, int number, String city, String state) {
         this.street = street;
         this.number = number;
         this.city = city;
@@ -21,11 +21,11 @@ public class Address implements Comparable<Address> {
         this.street = street;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 

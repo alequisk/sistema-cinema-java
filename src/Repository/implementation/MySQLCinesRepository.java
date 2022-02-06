@@ -1,11 +1,10 @@
 package Repository.implementation;
 
+import Models.Address;
 import Models.Cine;
 import Repository.CinesRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class MySQLCinesRepository implements CinesRepository {
@@ -25,7 +24,23 @@ public class MySQLCinesRepository implements CinesRepository {
 
     @Override
     public ArrayList<Cine> getAll() {
-        return null;
+        String query = "SELECT * FROM cines;";
+        ResultSet resultSet;
+        Statement statement;
+        ArrayList<Cine> cineArrayList = new ArrayList<>();
+        try {
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Address address = new Address(resultSet.getString("street"), resultSet.getInt("number"), resultSet.getString("city"), resultSet.getString("uf"));
+                cineArrayList.add(new Cine(resultSet.getString("name"), address));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error on list Cines!");
+            e.printStackTrace();
+        }
+        return cineArrayList;
     }
 
     @Override
